@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.2.0 (2025-10-16)
+
+### Features
+
+- Python code
+  ([`33984b6`](https://github.com/gsoulat/semantic-release-python-uv/commit/33984b6c5755b46e455871a932e427cc7e96f0b6))
+
+
 ## v1.1.0 (2025-10-16)
 
 
