@@ -9,7 +9,7 @@ name = "semantic-release"
 # Version actuelle du package - ATTENTION: Cette valeur est automatiquement
 # mise à jour par semantic-release lors d'un release. Ne la modifiez pas manuellement.
 
-version = "1.2.0-rc.1"
+version = "2.0.0-rc.1"
 
 
 

@@ -2,6 +2,18 @@
 
 <!-- version list -->
 
+## v2.0.0-rc.1 (2025-10-17)
+
+### Features
+
+- Python code
+  ([`e4feb81`](https://github.com/gsoulat/semantic-release-python-uv/commit/e4feb818c8e518a938c7817f7f0272f0982fbc34))
+
+### Breaking Changes
+
+- Cette modification casse la compatibilité
+
+
 ## v1.2.0-rc.1 (2025-10-16)
 
 
