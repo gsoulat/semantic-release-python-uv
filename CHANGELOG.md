@@ -6,10 +6,22 @@
 ### Features
 
 - Add new feature
+  ([`4a534b7`](https://github.com/gsoulat/semantic-release-python-uv/commit/4a534b734664ca348757e6e0dbfd69d28a9ee035))
+
+- Add new feature
   ([`b41ebd4`](https://github.com/gsoulat/semantic-release-python-uv/commit/b41ebd498ec55ca38da80058c4ca6c888317053a))
 
 - Add new feature
   ([`0288d08`](https://github.com/gsoulat/semantic-release-python-uv/commit/0288d084c21187d1af7cb14b609ad2982d273513))
+
+- Python code test
+  ([`8e71eba`](https://github.com/gsoulat/semantic-release-python-uv/commit/8e71eba6d0d298cb67736538b391287a239ede82))
+
+- Python code test
+  ([`9b1074e`](https://github.com/gsoulat/semantic-release-python-uv/commit/9b1074ef2bd2361b5a71898dc98e24f21ea161b4))
+
+- Python code test
+  ([`7239622`](https://github.com/gsoulat/semantic-release-python-uv/commit/7239622d1c8a5c9913cd98937dac37306e1fd75e))
 
 - Python code test
   ([`9354052`](https://github.com/gsoulat/semantic-release-python-uv/commit/9354052c7839d0b3eea090d6cd4bd69036be2569))
