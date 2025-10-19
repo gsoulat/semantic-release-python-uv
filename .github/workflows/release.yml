@@ -36,15 +36,5 @@ jobs:
           sr() {
             uvx --from="python-semantic-release@9.21.1" semantic-release "$@"
           }
-          sr version --no-push
-      
-      - name: Create Pull Request for Release
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(release): bump version"
-          branch: release/automated
-          delete-branch: true
-          title: "chore(release): new version"
-          body: |
-            Automated release PR created by semantic-release
+          sr version
+          sr publish
