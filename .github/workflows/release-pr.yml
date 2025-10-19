@@ -5,10 +5,9 @@ on:
     branches:
       - develop
       - main
-    types: [closed]  # Déclenché quand la PR est mergée
+    types: [closed]
 
 jobs:
-  # Job 1: Vérifier si c'est bien un merge (pas un close)
   check-merge:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
@@ -18,7 +17,6 @@ jobs:
       - id: check
         run: echo "should_release=true" >> $GITHUB_OUTPUT
 
-  # Job 2: Créer une PR de release
   create-release-pr:
     needs: check-merge
     if: needs.check-merge.outputs.should_release == 'true'
@@ -32,7 +30,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.base.ref }}
           fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}  # Utilisez GITHUB_TOKEN au lieu de GH_TOKEN
 
       - name: Setup uv
         uses: astral-sh/setup-uv@v5
@@ -43,7 +41,7 @@ jobs:
       - name: Calculate next version
         id: version
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           NEXT_VERSION=$(uvx --from="python-semantic-release@9.21.1" semantic-release version --print)
           echo "next_version=$NEXT_VERSION" >> $GITHUB_OUTPUT
@@ -51,7 +49,7 @@ jobs:
 
       - name: Run semantic-release (no push)
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           uvx --from="python-semantic-release@9.21.1" semantic-release version --no-push --no-tag --no-commit
 
@@ -63,7 +61,7 @@ jobs:
       - name: Create Release Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore(release): ${{ steps.version.outputs.next_version }}"
           branch: release/${{ steps.version.outputs.next_version }}
           delete-branch: true
