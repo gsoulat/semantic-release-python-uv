@@ -37,17 +37,27 @@ jobs:
         uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.13"
+      
+      # AJOUT: Calculer la version AVANT de l'utiliser
+      - name: Calculate next version
+        id: version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NEXT_VERSION=$(uvx --from="python-semantic-release@9.21.1" semantic-release version --print)
+          echo "next_version=$NEXT_VERSION" >> $GITHUB_OUTPUT
+          echo "Next version will be: $NEXT_VERSION"
             
       - name: Run semantic-release (no push)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            uvx --from="python-semantic-release@9.21.1" semantic-release version --no-push --no-tag --no-commit
+          uvx --from="python-semantic-release@9.21.1" semantic-release version --no-push --no-tag --no-commit
   
       - name: Build package
         run: |
-            uv lock --upgrade-package semantic-release-python-uv
-            uv build
+          uv lock --upgrade-package semantic-release-python-uv
+          uv build
   
       - name: Create Release Pull Request
         uses: peter-evans/create-pull-request@v7
@@ -58,17 +68,17 @@ jobs:
           delete-branch: true
           title: "chore(release): ${{ steps.version.outputs.next_version }}"
           body: |
-              ## 🚀 Release ${{ steps.version.outputs.next_version }}
-              
-              This PR was automatically created by semantic-release.
-              
-              ### Changes included:
-              - Updated version in pyproject.toml
-              - Updated uv.lock
-              - Built distribution packages
-              
-              **Merge this PR to trigger the actual release and tag creation.**
+            ## 🚀 Release ${{ steps.version.outputs.next_version }}
+            
+            This PR was automatically created by semantic-release.
+            
+            ### Changes included:
+            - Updated version in pyproject.toml
+            - Updated uv.lock
+            - Built distribution packages
+            
+            **Merge this PR to trigger the actual release and tag creation.**
           labels: |
-              release
-              automated
+            release
+            automated
           base: ${{ github.event.pull_request.base.ref }}
